@@ -5,19 +5,19 @@ import InventorySummary from "../components/Cards/InventorySummary";
 
 const Home = () => {
   const [inventorySummaryData, setInventorySummaryData] = useState();
-  const [inventoryDetails, setInventoryDetails] = useState();
+  // const [inventoryDetails, setInventoryDetails] = useState();
 
   useEffect(() => {
-    fetch("http://localhost:3001/api")
+    fetch("http://localhost:3001/summary")
       .then((res) => res.json())
       .then((data) => setInventorySummaryData(data));
   }, []);
 
-  useEffect(() => {
-    fetch("http://localhost:3001/api/details")
-      .then((res) => res.json())
-      .then((data) => setInventoryDetails(data));
-  });
+  // useEffect(() => {
+  //   fetch("http://localhost:3001/inventory")
+  //     .then((res) => res.json())
+  //     .then((data) => setInventoryDetails(data));
+  // }, []);
 
   return (
     <>
@@ -27,6 +27,11 @@ const Home = () => {
           <Grid item xs={6}>
             <Card variant="outlined">
               <InventorySummary data={inventorySummaryData} />
+            </Card>
+          </Grid>
+          <Grid item xs={6}>
+            <Card variant="outlined">
+            
             </Card>
           </Grid>
         </Grid>
