@@ -6,10 +6,13 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  FormControlLabel,
+  Checkbox,
+  Alert
 } from "@mui/material";
 import React from "react";
 
-const WFHCheckOutForm = ({ employees }) => {
+const WFHCheckOutForm = ({ employees, newChecked, handleNewChecked }) => {
   const paperStyle = {
     padding: 20,
     height: "90vh",
@@ -30,17 +33,40 @@ const WFHCheckOutForm = ({ employees }) => {
             </Typography>
           </Grid>
           <Grid container spacing={2} align="left">
-            <FormControl fullWidth>
-              <InputLabel id="employee-select-label">Employee</InputLabel>
-              <Select
-              labelId="employee-select-label"
-              id="employee-select"
-              >
-                {employees.map((employee) => (
-                  <MenuItem>{employee.employeeName}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <Grid xs={7} item>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    color="primary"
+                    checked={newChecked}
+                    onChange={handleNewChecked}
+                  />
+                }
+                label="New Inventory"
+              />
+            </Grid>
+            {
+              newChecked && (<Alert severity="info">Use only for Inventory not previously assigned. Checking this box will both add new inventory and assign it to a WFH employee</Alert>)
+            }
+            <Grid xs={6} item>
+              <FormControl fullWidth>
+                <InputLabel id="site-select-label">Site</InputLabel>
+                <Select labelId="site-select-label" id="site-select">
+                    <MenuItem>NYC Office</MenuItem>
+                    <MenuItem>Ohio Office</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid xs={6} item>
+              <FormControl fullWidth>
+                <InputLabel id="employee-select-label">Employee</InputLabel>
+                <Select labelId="employee-select-label" id="employee-select">
+                  {employees.map((employee) => (
+                    <MenuItem>{employee.employeeName}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
           </Grid>
         </Paper>
       </Grid>

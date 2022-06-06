@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { AuthProvider } from "./contexts/AuthContext";
 import LogInSignUp from "./pages/LogInSignUp";
+import { Fragment } from "react";
 
 function App() {
   const theme = createTheme({
@@ -14,20 +15,28 @@ function App() {
     },
   });
   return (
-    // <AuthProvider>
+    <AuthProvider>
       <ThemeProvider theme={theme}>
         <div className="App">
           <Router>
-            <Routes>
-              <Route exact path="/" element={<LogInSignUp/>}/>
-              <PrivateRoute path="/home" component={Home} />
-              <PrivateRoute path="/new" component={AddInventory} />
-              <PrivateRoute path="/wfh" component={WFHCheckOut} />
-            </Routes>
+            <Fragment>
+              <Routes>
+                <Route path="/" element={<LogInSignUp />}></Route>
+                <Route path="/home" element={<PrivateRoute />}>
+                  <Route path="/home" element={<Home />} />
+                </Route>
+                <Route path="/new" element={<PrivateRoute />}>
+                  <Route path="/new" element={<AddInventory />} />
+                </Route>
+                <Route path="wfh" element={<PrivateRoute />}>
+                  <Route path="/wfh" element={<WFHCheckOut />} />
+                </Route>
+              </Routes>
+            </Fragment>
           </Router>
         </div>
       </ThemeProvider>
-    // </AuthProvider>
+    </AuthProvider>
   );
 }
 

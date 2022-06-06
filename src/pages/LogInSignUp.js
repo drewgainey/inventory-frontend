@@ -33,7 +33,7 @@ const LogInSignUp = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [registrationCode, setRegistrationCode] = useState("");
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e, newValue) => {
@@ -50,54 +50,53 @@ const LogInSignUp = () => {
   };
   const handleRegistrationCodeChange = (e) => {
     setRegistrationCode(e.target.value);
-  }
+  };
 
   const paperStyle = {
-    width: 320,
+    width: 360,
     margin: "20px auto",
   };
 
   return (
-    <Typography>Log In</Typography>
-    // <Paper elevation={20} style={paperStyle}>
-    //   <Tabs
-    //     value={value}
-    //     indicatorColor="primary"
-    //     textColor="primary"
-    //     onChange={handleChange}
-    //   >
-    //     <Tab label="Sign In" style={{ width: 160 }} />
-    //     <Tab label="Sign Up" style={{ width: 160 }} />
-    //   </Tabs>
-    //   <TabPanel value={value} index={0}>
-    //     <LogIn
-    //       email={email}
-    //       password={password}
-    //       handleEmailChange={handleEmailChange}
-    //       handlePasswordChange={handlePasswordChange}
-    //       error={error}
-    //       setError={setError}
-    //       loading={loading}
-    //       setLoading={setLoading}
-    //     />
-    //   </TabPanel>
-    //   <TabPanel value={value} index={1}>
-    //     <SignUp
-    //       email={email}
-    //       password={password}
-    //       passwordConfirm={passwordConfirm}
-    //       handleEmailChange={handleEmailChange}
-    //       handlePasswordChange={handlePasswordChange}
-    //       handlePasswordConfirmChange={handlePasswordConfirmChange}
-    //       registrationCode={registrationCode}
-    //       handleRegistrationCodeChange={handleRegistrationCodeChange}
-    //       error={error}
-    //       setError={setError}
-    //       loading={loading}
-    //       setLoading={setLoading}
-    //     />
-    //   </TabPanel>
-    // </Paper>
+    <Paper elevation={20} style={paperStyle}>
+      <Tabs
+        value={value}
+        indicatorColor="primary"
+        textColor="primary"
+        onChange={handleChange}
+      >
+        <Tab label="Sign In" style={{ width: 160 }} />
+        <Tab label="Sign Up" style={{ width: 160 }} />
+      </Tabs>
+      <TabPanel value={value} index={0}>
+        <LogIn
+          email={email}
+          password={password}
+          handleEmailChange={handleEmailChange}
+          handlePasswordChange={handlePasswordChange}
+          error={error}
+          setError={setError}
+          loading={loading}
+          setLoading={setLoading}
+        />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <SignUp
+          email={email}
+          password={password}
+          passwordConfirm={passwordConfirm}
+          handleEmailChange={handleEmailChange}
+          handlePasswordChange={handlePasswordChange}
+          handlePasswordConfirmChange={handlePasswordConfirmChange}
+          registrationCode={registrationCode}
+          handleRegistrationCodeChange={handleRegistrationCodeChange}
+          error={error}
+          setError={setError}
+          loading={loading}
+          setLoading={setLoading}
+        />
+      </TabPanel>
+    </Paper>
   );
 };
 

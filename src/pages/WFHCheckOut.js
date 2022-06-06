@@ -4,17 +4,26 @@ import WFHCheckOutForm from "../components/WFHCheckOutForm";
 
 const WFHCheckOut = () => {
   const [employees, setEmployees] = useState([]);
-  
+  const [newChecked, setNewChecked] = useState(false);
+
   useEffect(() => {
     fetch("http://localhost:3001/employees")
-    .then((res) => res.json())
-    .then((data) => setEmployees(data));
+      .then((res) => res.json())
+      .then((data) => setEmployees(data));
   }, []);
+
+  const handleNewChecked = () => {
+    setNewChecked((prev) => !prev);
+  }
 
   return (
     <>
       <NavBar />
-      <WFHCheckOutForm employees={employees}/>
+      <WFHCheckOutForm
+        employees={employees}
+        newChecked={newChecked}
+        handleNewChecked={handleNewChecked}
+      />
     </>
   );
 };

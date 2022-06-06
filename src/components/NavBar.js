@@ -1,13 +1,21 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 import { AppBar, Toolbar, Typography, IconButton, Button } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuDrawer from "./MenuDrawer";
+import { useAuth } from "../contexts/AuthContext";
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { signout } = useAuth();
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setMenuOpen((prev) => !prev);
+  };
+  const handleLogOut = () => {
+    signout();
+    navigate("/");
   };
 
   return (
@@ -26,7 +34,9 @@ const NavBar = () => {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           IT Inventory
         </Typography>
-        <Button color="inherit">Logout</Button>
+        <Button color="inherit" onClick={handleLogOut}>
+          Logout
+        </Button>
         <MenuDrawer menuOpen={menuOpen} closeMenu={handleClick}></MenuDrawer>
       </Toolbar>
     </AppBar>

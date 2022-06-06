@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth } from "../contexts/AuthContext";
-// import { useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
@@ -25,7 +25,7 @@ const SignUp = ({
   setLoading
 }) => {
   const { signup } = useAuth();
-//   const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,23 +54,23 @@ const SignUp = ({
       setError('Failed to Create Account Please Check Registration Code');
       setLoading(false);
     }
-    // history.push('/home')
+     navigate('/home')
   };
   const paperStyle = {
     padding: 20,
     height: "70vh",
-    width: 280,
+    width: 320,
     margin: "0 auto",
   };
   return (
     <Grid>
       <Paper elevation={10} style={paperStyle}>
         <Grid align="center">
-          <Avatar style={{ backgroundColor: "#1976d2" }}>
+          <Avatar style={{ backgroundColor: "#000000" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography variant="h4" style={{ fontWeight: "bold" }}>
-            Support Portal
+            Inventory Manager
           </Typography>
           <Typography variant="subtitle1">New User Sign Up</Typography>
         </Grid>

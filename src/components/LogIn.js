@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth } from "../contexts/AuthContext";
-// import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
@@ -16,7 +16,7 @@ const LogIn = ({
   email,
   password,
   handleEmailChange,
-  handlePasswordChange,
+  handlePasswordChange, 
   error,
   setError,
   loading,
@@ -25,11 +25,11 @@ const LogIn = ({
   const paperStyle = {
     padding: 20,
     height: "70vh",
-    width: 280,
+    width: 320,
     margin: "0 auto",
   };
   const { signin } = useAuth();
-//   const history = useHistory();
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -42,18 +42,18 @@ const LogIn = ({
       return;
     }
     setLoading(false);
-    // history.push("/home");
+    navigate("/home");
   };
 
   return (
     <Grid>
       <Paper elevation={10} style={paperStyle}>
         <Grid align="center">
-          <Avatar style={{ backgroundColor: "#1976d2" }}>
+          <Avatar style={{ backgroundColor: "#000000" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography variant="h4" style={{ fontWeight: "bold" }}>
-            Support Portal
+            Inventory Manager
           </Typography>
           <Typography variant="subtitle1">Sign In</Typography>
         </Grid>
