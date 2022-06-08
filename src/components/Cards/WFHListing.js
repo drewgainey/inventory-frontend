@@ -7,19 +7,19 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import { IconButton, Tooltip } from "@mui/material";
+import { Download } from "@mui/icons-material";
 
-const WFHListing = ({
-  employees,
-  computers,
-  monitors,
-  headsets,
-  keyboards,
-  mouses,
-}) => {
+const WFHListing = ({ handleExport, rows }) => {
   return (
     <TableContainer component={Paper}>
       <TableHead>
-        <Typography variant="h6">Current Work From Home Inventory</Typography>
+          <Typography variant="h6">Current Work From Home Inventory</Typography>
+          <Tooltip title="Export To Excel">
+          <IconButton onClick={handleExport}>
+            <Download />
+          </IconButton>
+          </Tooltip>
       </TableHead>
       <Table sx={{ minWidth: 650 }} stickyHeader={true}>
         <TableHead>
@@ -34,46 +34,19 @@ const WFHListing = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {employees &&
-            computers &&
-            headsets &&
-            employees.map((employee) => {
-              let computerYear = "";
-              let employeeComputer = computers.find(
-                (computer) => computer.employee === employee._id
-              );
-              employeeComputer ? computerYear = employeeComputer.yearPurchased : computerYear = "None";
-
-              let headsetStyle = "";
-              let employeeHeadset = headsets.find(
-                (headset) => headset.employee === employee._id
-              );
-              employeeHeadset ? headsetStyle = employeeHeadset.style : headsetStyle = "None";
-
-              let keyboard = "";
-              let employeekeyboard = keyboards.find(
-                (keyboard) => keyboard.employee === employee._id
-              );
-              employeekeyboard ? keyboard = "Yes" : keyboard = "No";
-
-              let mouse = "";
-              let employeemouse = mouses.find(
-                (mouse) => mouse.employee === employee._id
-              );
-              employeemouse ? mouse = "Yes" : mouse = "No";
-
-              return (
-                <TableRow>
-                  <TableCell>{employee.employeeName}</TableCell>
-                  <TableCell align="left">{computerYear}</TableCell>
-                  <TableCell></TableCell>
-                  <TableCell></TableCell>
-                  <TableCell align="left">{headsetStyle}</TableCell>
-                  <TableCell align="left">{keyboard}</TableCell>
-                  <TableCell align="left">{mouse}</TableCell>
-                </TableRow>
-              );
-            })}
+          {rows.map((row) => {
+            return (
+              <TableRow>
+                <TableCell>{row.employee}</TableCell>
+                <TableCell align="left">{row.employeeComputer}</TableCell>
+                <TableCell>{row.monitor1}</TableCell>
+                <TableCell>{row.monitor2}</TableCell>
+                <TableCell align="left">{row.headset}</TableCell>
+                <TableCell align="left">{row.keyboard}</TableCell>
+                <TableCell align="left">{row.mouse}</TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </TableContainer>

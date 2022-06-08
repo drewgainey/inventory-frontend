@@ -8,6 +8,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import LogInSignUp from "./pages/LogInSignUp";
 import { Fragment } from "react";
 import WFHReport from "./pages/WFHReport";
+import WFHReportDownload from "./pages/WFHReportDownload";
 
 function App() {
   const theme = createTheme({
@@ -35,6 +36,7 @@ function App() {
                 <Route path="wfhreport" element={<PrivateRoute />}>
                   <Route path="/wfhreport" element={<WFHReport />} />
                 </Route>
+                <Route path="/download" element={<WFHReportDownload/>}/>
               </Routes>
             </Fragment>
           </Router>
