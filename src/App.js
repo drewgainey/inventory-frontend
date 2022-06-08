@@ -7,6 +7,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { AuthProvider } from "./contexts/AuthContext";
 import LogInSignUp from "./pages/LogInSignUp";
 import { Fragment } from "react";
+import WFHReport from "./pages/WFHReport";
 
 function App() {
   const theme = createTheme({
@@ -30,6 +31,9 @@ function App() {
                 </Route>
                 <Route path="wfh" element={<PrivateRoute />}>
                   <Route path="/wfh" element={<WFHCheckOut />} />
+                </Route>
+                <Route path="wfhreport" element={<PrivateRoute />}>
+                  <Route path="/wfhreport" element={<WFHReport />} />
                 </Route>
               </Routes>
             </Fragment>

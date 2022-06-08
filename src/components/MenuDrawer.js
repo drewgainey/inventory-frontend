@@ -23,8 +23,17 @@ const MenuDrawer = ({ menuOpen, closeMenu }) => {
         <ListItemButton component={Link} to="/new">
           <ListItemText primary="Add Inventory" />
         </ListItemButton>
+        <ListItemButton component={Link} to="/">
+          <ListItemText primary="Inventory Listing" />
+        </ListItemButton>
         <ListItemButton component={Link} to="/wfh">
           <ListItemText primary="Work From Home Checkout" />
+        </ListItemButton>
+        <ListItemButton component={Link} to="/wfhreport">
+          <ListItemText primary="Work From Home Report" />
+        </ListItemButton>
+        <ListItemButton component={Link} to="/">
+          <ListItemText primary="Employee Admin" />
         </ListItemButton>
       </List>
     </Drawer>

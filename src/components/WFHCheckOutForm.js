@@ -51,6 +51,8 @@ const WFHCheckOutForm = ({
   handleKeyboardChange,
   mouse,
   handleMouseChange,
+  handleCheckoutClick,
+  location
 }) => {
   const paperStyle = {
     padding: 20,
@@ -101,9 +103,9 @@ const WFHCheckOutForm = ({
                     onChange={handleCurrentEmployeeChange}
                   >
                     {employees
-                      .filter((employee) => employee.site === site)
+                      .filter((employee) => site? employee.site === site : true) 
                       .map((employee) => (
-                        <MenuItem value={employee.employeeName}>
+                        <MenuItem value={employee}>
                           {employee.employeeName}
                         </MenuItem>
                       ))}
@@ -138,7 +140,7 @@ const WFHCheckOutForm = ({
                           />
                         </TableCell>
                         <TableCell align="left">
-                          <Button variant="contained">Check Out</Button>
+                          <Button variant="contained" onClick={handleCheckoutClick}>Check Out</Button>
                         </TableCell>
                       </TableRow>
                     </TableHead>

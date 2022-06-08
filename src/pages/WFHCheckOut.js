@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
+import postWFHCheckOut from "../api/postWFHCheckOut";
 import NavBar from "../components/NavBar";
 import WFHCheckOutForm from "../components/WFHCheckOutForm";
 
 const WFHCheckOut = () => {
   const [employees, setEmployees] = useState([]);
   const [site, setSite] = useState("");
-  const [currentEmployee, setCurrentEmployee] = useState("");
+  const [currentEmployee, setCurrentEmployee] = useState({});
   const [newChecked, setNewChecked] = useState(false);
   const [computer, setComputer] = useState(false);
   const [computerYear, setComputerYear] = useState('2022');
@@ -18,6 +19,7 @@ const WFHCheckOut = () => {
   const [headsetDuo, setHeadsetDuo] = useState(false);
   const [keyboard, setKeyboard] = useState(false);
   const [mouse, setMouse] = useState(false);
+  const location = "Work From Home";
 
   useEffect(() => {
     fetch("http://localhost:3001/employees")
@@ -72,42 +74,49 @@ const WFHCheckOut = () => {
   const handleMouseChange = () => {
     setMouse((prev) => !prev);
   };
-  
-  const formProps = {
+  const wfhState = {
     employees,
     site,
     currentEmployee,
     newChecked,
+    computer,
+    computerYear,
+    monitors,
+    monitorQuantity,
+    monitor1Style,
+    monitor2Style,
+    headset,
+    headsetMono,
+    headsetDuo,
+    keyboard,
+    mouse,
+    location
+  }
+  const handleCheckoutClick = () => {
+    postWFHCheckOut({...wfhState});
+  };
+  
+  const formProps = {
     handleSiteChange,
     handleCurrentEmployeeChange,
     handleNewChecked,
-    computer,
     handleComputerChange,
-    computerYear,
     handleComputerYearChange,
-    monitors,
     handleMonitorsChange,
-    monitorQuantity,
     handleMonitorQuantityChange,
-    monitor1Style,
     handleMonitor1StyleChange,
-    monitor2Style,
     handleMonitor2StyleChange,
-    headset,
     handleHeadsetChange,
-    headsetMono,
     handleHeadsetMonoChange,
-    headsetDuo,
     handleHeadsetDuoChange,
-    keyboard,
     handleKeyboardChange,
-    mouse,
     handleMouseChange,
+    handleCheckoutClick,
   };
   return (
     <>
       <NavBar />
-      <WFHCheckOutForm {...formProps} />
+      <WFHCheckOutForm {...wfhState} {...formProps} />
     </>
   );
 };
