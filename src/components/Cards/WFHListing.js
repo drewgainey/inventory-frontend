@@ -7,20 +7,20 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import { IconButton, Tooltip } from "@mui/material";
+import { IconButton, Toolbar, Tooltip } from "@mui/material";
 import { Download } from "@mui/icons-material";
 
 const WFHListing = ({ handleExport, rows }) => {
   return (
     <TableContainer component={Paper}>
-      <TableHead>
-          <Typography variant="h6">Current Work From Home Inventory</Typography>
-          <Tooltip title="Export To Excel">
+      <Toolbar>
+        <Typography variant="h6">Current Work From Home Inventory</Typography>
+        <Tooltip title="Export To Excel">
           <IconButton onClick={handleExport}>
             <Download />
           </IconButton>
-          </Tooltip>
-      </TableHead>
+        </Tooltip>
+      </Toolbar>
       <Table sx={{ minWidth: 650 }} stickyHeader={true}>
         <TableHead>
           <TableRow>

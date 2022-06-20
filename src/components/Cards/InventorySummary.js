@@ -8,21 +8,23 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Toolbar from "@mui/material/Toolbar";
-import AspectRatioOutlinedIcon from "@mui/icons-material/AspectRatioOutlined";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
+import { Download } from "@mui/icons-material";
 
-const InventorySummary = ({ data }) => {
+const InventorySummary = ({ computers, monitors, headsets, keyboards, mouses, handleExport }) => {
   
+  const categories = [computers, monitors, headsets, keyboards, mouses];
+
   return (
     <TableContainer component={Paper}>
       <Toolbar sx={{ backgroundColor: "primary.main" }}>
         <Typography variant="h6" style={{ color: "#f3e5f5" }}>
-          Current Inventory By Location
+          Current Inventory
         </Typography>
-        <Tooltip title="expand">
-          <IconButton>
-            <AspectRatioOutlinedIcon sx={{ color: "#f3e5f5" }} />
+        <Tooltip title="Export To Excel">
+          <IconButton onClick={handleExport}>
+            <Download sx={{ color: "#f3e5f5" }}></Download>
           </IconButton>
         </Tooltip>
       </Toolbar>
@@ -31,22 +33,22 @@ const InventorySummary = ({ data }) => {
           <TableRow>
             <TableCell>Category</TableCell>
             <TableCell align="center">NYC Assigned</TableCell>
-            <TableCell align="center">NYC Storage</TableCell>
+            <TableCell align="center">NYC Available</TableCell>
             <TableCell align="center">Ohio Assigned</TableCell>
-            <TableCell align="center">Ohio Storage</TableCell>
+            <TableCell align="center">Ohio Available</TableCell>
             <TableCell aligh="center">Total</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {data && data.inventorySummary.map((type) => {
+          {categories && categories.map((category) => {
             return (
               <TableRow>
-                <TableCell>{type.itemType}</TableCell>
-                <TableCell align="center">{type.nycAssigned}</TableCell>
-                <TableCell align="center">{type.nycStorage}</TableCell>
-                <TableCell align="center">{type.ohioAssigned}</TableCell>
-                <TableCell align="center">{type.ohioStorage}</TableCell>
-                <TableCell aligh="center">{type.total}</TableCell>
+                <TableCell>{category.type}</TableCell>
+                <TableCell align="center">{category.nycAssigned}</TableCell>
+                <TableCell align="center">{category.nycAvailable}</TableCell>
+                <TableCell align="center">{category.ohioAssigned}</TableCell>
+                <TableCell align="center">{category.ohioAvailable}</TableCell>
+                <TableCell aligh="center">{category.total}</TableCell>
               </TableRow>
             );
           })}

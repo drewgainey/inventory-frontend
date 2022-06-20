@@ -8,7 +8,8 @@ import { AuthProvider } from "./contexts/AuthContext";
 import LogInSignUp from "./pages/LogInSignUp";
 import { Fragment } from "react";
 import WFHReport from "./pages/WFHReport";
-import WFHReportDownload from "./pages/WFHReportDownload";
+import InventoryListing from "./pages/InventoryListing";
+import EmployeeListing from "./pages/EmployeeListing";
 
 function App() {
   const theme = createTheme({
@@ -30,13 +31,18 @@ function App() {
                 <Route path="/new" element={<PrivateRoute />}>
                   <Route path="/new" element={<AddInventory />} />
                 </Route>
-                <Route path="wfh" element={<PrivateRoute />}>
+                <Route path="/wfh" element={<PrivateRoute />}>
                   <Route path="/wfh" element={<WFHCheckOut />} />
                 </Route>
-                <Route path="wfhreport" element={<PrivateRoute />}>
+                <Route path="/wfhreport" element={<PrivateRoute />}>
                   <Route path="/wfhreport" element={<WFHReport />} />
                 </Route>
-                <Route path="/download" element={<WFHReportDownload/>}/>
+                <Route path="/inventory" element={<PrivateRoute />}>
+                  <Route path="/inventory" element={<InventoryListing />} />
+                </Route>
+                <Route path="/employees" element={<PrivateRoute />}>
+                  <Route path="/employees" element={<EmployeeListing />} />
+                </Route>
               </Routes>
             </Fragment>
           </Router>

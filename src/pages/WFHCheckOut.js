@@ -1,3 +1,4 @@
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import postWFHCheckOut from "../api/postWFHCheckOut";
 import NavBar from "../components/NavBar";
@@ -6,7 +7,7 @@ import WFHCheckOutForm from "../components/WFHCheckOutForm";
 const WFHCheckOut = () => {
   const [employees, setEmployees] = useState([]);
   const [site, setSite] = useState("");
-  const [currentEmployee, setCurrentEmployee] = useState({});
+  const [currentEmployee, setCurrentEmployee] = useState("");
   const [newChecked, setNewChecked] = useState(false);
   const [computer, setComputer] = useState(false);
   const [computerYear, setComputerYear] = useState('2022');
@@ -19,6 +20,10 @@ const WFHCheckOut = () => {
   const [headsetDuo, setHeadsetDuo] = useState(false);
   const [keyboard, setKeyboard] = useState(false);
   const [mouse, setMouse] = useState(false);
+  const [openSubmitDialog, setOpenSubmitDialog] = useState(false);
+  const [openErrorDialog, setOpenErrorDialog] = useState(false);
+  const [error, setError] = useState("");
+
   const location = "Work From Home";
 
   useEffect(() => {
@@ -26,7 +31,11 @@ const WFHCheckOut = () => {
       .then((res) => res.json())
       .then((data) => setEmployees(data));
   }, []);
-
+  const handleDialogClose = () => {
+    setError("");
+    setOpenSubmitDialog(false);
+    setOpenErrorDialog(false);
+  }
   const handleSiteChange = (e) => {
     setSite(e.target.value);
   };
@@ -93,8 +102,23 @@ const WFHCheckOut = () => {
     location
   }
   const handleCheckoutClick = () => {
-    postWFHCheckOut({...wfhState});
+    if(site === "" || currentEmployee ==="") {
+      setError("Please Select an Employee and Location");
+      setOpenErrorDialog(true);
+      return;
+    }
+    if (!computer && !monitors && !headset && !keyboard && !mouse) {
+      setError("Atleast One Item Should be Selected");
+      setOpenErrorDialog(true);
+      return;
+    }
+    setOpenSubmitDialog(true);
   };
+
+  const handleSubmit = () => {
+    postWFHCheckOut({...wfhState});
+    window.location.reload();
+  }
   
   const formProps = {
     handleSiteChange,
@@ -117,6 +141,23 @@ const WFHCheckOut = () => {
     <>
       <NavBar />
       <WFHCheckOutForm {...wfhState} {...formProps} />
+      <Dialog open={openSubmitDialog} onClose={handleDialogClose}>
+        <DialogContent>
+          <DialogContentText>Are you sure you want to submit?</DialogContentText>
+          <DialogActions>
+            <Button onClick={handleSubmit}>Yes</Button>
+            <Button onClick={handleDialogClose}>No</Button>
+          </DialogActions>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={openErrorDialog} onClose={handleDialogClose}>
+        <DialogContent>
+          <DialogContentText>{error}</DialogContentText>
+          <DialogActions>
+            <Button onClick={handleDialogClose}>Ok</Button>
+          </DialogActions>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

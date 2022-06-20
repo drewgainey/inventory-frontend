@@ -18,6 +18,7 @@ import {
   TableCell,
   TableHead,
   TextField,
+  Toolbar,
 } from "@mui/material";
 import React from "react";
 
@@ -52,7 +53,6 @@ const WFHCheckOutForm = ({
   mouse,
   handleMouseChange,
   handleCheckoutClick,
-  location
 }) => {
   const paperStyle = {
     padding: 20,
@@ -80,7 +80,8 @@ const WFHCheckOutForm = ({
             {/* Form Header Start */}
             <Grid xs={12} item>
               <Card>
-                <FormControl sx={{ minWidth: 120 }} size="small">
+                <Toolbar>
+                <FormControl sx={{ minWidth: 180 }} size="small">
                   <InputLabel id="site-select-label">Site</InputLabel>
                   <Select
                     labelId="site-select-label"
@@ -94,7 +95,7 @@ const WFHCheckOutForm = ({
                     <MenuItem value={"Ohio Office"}>Ohio Office</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl sx={{ minWidth: 120 }} size="small">
+                <FormControl sx={{ minWidth: 180, marginLeft: 5 }} size="small">
                   <InputLabel id="employee-select-label">Employee</InputLabel>
                   <Select
                     labelId="employee-select-label"
@@ -111,6 +112,7 @@ const WFHCheckOutForm = ({
                       ))}
                   </Select>
                 </FormControl>
+                </Toolbar>
               </Card>
             </Grid>
             {/* Form Table Header */}
@@ -160,7 +162,7 @@ const WFHCheckOutForm = ({
                           <TextField
                             label="Year Purchased"
                             type="number"
-                            disabled={!computer}
+                            disabled={!computer || !newChecked}
                             value={computerYear}
                             onChange={handleComputerYearChange}
                           />
